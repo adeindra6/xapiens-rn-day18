@@ -1,11 +1,12 @@
 import React from 'react';
-import {FlatList, TouchableOpacity, View, Text} from 'react-native';
+import {FlatList, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
 import {useQuery} from '@apollo/client';
-import {QUERY_USERTASK} from '@config/graphql/Query/usertask';
+import {QUERY_USERTASK} from '../../config/graphql/Query/usertask';
 
 const ListComponent = (props) => {
     const {loading, data, error} = useQuery(QUERY_USERTASK);
-    console.log(data);
+    console.log(`Data List Component: ${data}`);
+    console.log(`Error List Component: ${error}`);
 
     return(
         <View>
@@ -15,8 +16,9 @@ const ListComponent = (props) => {
                     data={data.user}
                     renderItem={({item}) => {
                         return(
-                            <TouchableOpacity>
-                                <Text>{item.usertask.task}: {item.name}</Text>
+                            <TouchableOpacity
+                                style={styles.btn}>
+                                <Text style={styles.label}>{item.usertask.task}: {item.name}</Text>
                             </TouchableOpacity>
                         );
                     }}
@@ -25,5 +27,22 @@ const ListComponent = (props) => {
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    btn: {
+        backgroundColor: 'white',
+        borderColor: 'black',
+        borderWidth: 1,
+        width: '90%',
+        alignSelf: 'center',
+        justifyContent: 'center'
+    },
+
+    label: {
+        color: 'blue',
+        textAlign: 'center',
+        fontSize: 16,
+    },
+});
 
 export default ListComponent;

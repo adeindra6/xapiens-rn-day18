@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {TitleComponent, ListComponent} from '@components';
-import {GraphQLProvider} from '@config/apollo';
+import {GraphQLProvider} from '../../config/apollo';
 
 const TaskScreen = (props) => {
     //console.log({props});
